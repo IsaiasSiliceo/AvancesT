@@ -1,0 +1,9 @@
+set terminal pngcairo font 'Helvetica, 16' size 1024,768 enhanced color
+set output "StdDev.png" 
+
+set title 'Standard Deviation \{/Symbol s} of Gaussian fits as a function of the energy levels (k=62-75)'
+set log y
+set ylabel '\{Symbol s}'
+set xlabel 'Energy level'
+
+plot 'Tabla.dat' using 1:6 every 2::1 with linespoints lw 2 title 'k=Upper', 'Tabla.dat' using 1:2 every 2 with linespoints lw 2 title 'Lower'

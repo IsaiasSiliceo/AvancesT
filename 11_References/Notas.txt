@@ -1,0 +1,35 @@
+
+Dynamical Tunneling: Theory and Experiment
+
+Dynamical tunneling got its name by its contrast with barrier tunneling
+
+Even in the absence of potential barriers, the dynamics may refuse to carry the trajectories from region A to region B, and if the quantum amplitudes respect no such constraint in the quantized version of the same system, we say the quantum system is "dynamically tunneling".
+
+Bill Miller callls 'Classically forbidden processes': They are divided in two, barrier tunneling adn dynamical tunneling.
+
+The most important paradigm for dynamical tunneling is above-barrier-reflection, alluded to at the beginning of this chapter.
+
+Under certain rather general circumstances, collisions of pairs of levels resulting in an avoided crossing as a function of a parameter in the Hamiltonian signal interaction of those two levels, and if they come from very different parts of phase space, signal the dynamical tunneling from one to the other.
+
+Dynamical tunneling interactions and their consequent avoided crossings cause a mixing of states. This has important experimental implications, since not all states are equal when it comes to coupling to the outside world. For example, optical dipole moments can vary temendously from one zeroth-order state to the next. If tunneling interactions mix a state carrying a strong dipole from an initial state into many others nearby eigenstates, all of which have some of the character of the original zero to order state.
+
+Avoided crossings increase spectral complexity
+
+
+Cohen
+
+General study of two-level systems
+
+Consider, a physical system having two states whose energies are close together and very different from those of all other states of the system. Assume that we want to evaluate the effect of an external perturbation on these two states.
+When the intensity of the perturbation is sufficiently weak, it can be shown that its effect on the two states can be calculated, to a first approximation, by ignoring all the other energy levels of the system.
+
+Assume that we want to take into account an external perturbation, or interactions internal to the system, initially neglected in H0. the Hamiltonian becomes H=H0+W
+
+H0 is often called the unperturbed Hamiltonian and W, the perturbation or coupling.
+
+In the absence of coupling, the energies corresponding to H0 are the only possible energies of the system.
+
+effects of the coupling:
+	- All the interesting effects arise from the fact that the perturbation w possesses non-diagonal matrix elements. Under the effect of the non-diagonal coupling W, the two perturbed levels "repel each other" and we obtain an "anti-crossing". In the absence of coupling, there are real crossings.
+
+	- Like the energies, the eigenstates undergo significant modifications in the neighborhodd of the point where the two unperturbed states cross.

@@ -1,0 +1,6 @@
+
+set size square
+set format x
+set format y
+set pm3dmap
+splot 'Wehrl60-69.dat' using 1:2:3 with pm3d

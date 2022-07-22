@@ -1,0 +1,188 @@
+!******************
+! compile as:
+! gfortran -o Diagonalizacion ./Diagonalizacion.f90 -L/usr/local/lib -llapack -lblas
+!************************
+! Example of matrix diagonalization using LAPACK routine dsyev.f and the ! 
+! Fortran 90 interface diasym.f90.                                       !
+!------------------------------------------------------------------------!
+! Input from file 'mat.dat' (matrix to be diagonalized):                 !
+! line 1      : order of the symmetric matrix [M]                        !
+! lines 2-n+1 : rows of the matrix                                       !
+!------------------------------------------------------------------------!
+! Output in file 'dia.dat':                                              !
+! - eigenvalues                                                          !
+! - eigenvectors (diagonalizing matrix [D])                              !
+! - the original matrix [M] transformed by [D]; [1/D][M][D]              !
+!------------------------------------------------------------------------!
+
+!---------------!
+ program Diagonalizacion
+!---------------!
+ implicit none
+ 
+ integer k, res
+ double precision x
+ integer :: i,ii,n,m,j,jj,l,p,q,O
+ integer, allocatable :: r(:)
+ real(8), allocatable :: m0p(:,:),m1p(:,:),m2p(:,:),evls(:)
+
+ ! Este entero n se refiere a la dimension de la matriz,
+ ! en tu caso estara relacionado con el momento angular j 
+ print*, 'Introduce j:'
+ read*, j
+ n=2*j+1
+ print*, "El orden de la matriz es ", n 
+ 
+! Asignamos el tamaño a las matrices de nxn
+ allocate(m0p(n,n))
+ allocate(m1p(n,n))
+ allocate(m2p(n,n))
+ allocate(evls(n))
+ allocate(r(n))
+
+ !********************************************************************
+ ! ************Encuentra los elementos de matriz**********************
+ !********************************************************************
+  
+! comienza todos los elementos en zero para evitar errores
+do i=1,n
+do ii=1,n
+   m0p(i,ii)=0.0
+ enddo
+enddo
+
+! Se llama a la rutina range para generar un vector de j a -j en pasos de 1
+   call range(n,j,r)
+
+!******************************************************************************
+ !                           Impresion de resultados
+!******************************************************************************
+! para llama un solo valor de gammax
+x=0.0
+!print*, 'El valor de gammax es:', x   
+!call gmx(x,m0p,n,j,r,evls)
+!print*,'-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+'
+!print*, 'Eigenvalores'
+!print*, evls(:)
+
+! Para un espectro completo
+open(10, file = 'Ek.dat', status= 'unkown')
+do ii=1, 51
+   call gmx(x,m0p,n,j,r,evls)
+   write(10,*) -x, evls(:)/j
+   x=x-0.1
+end do
+close(10)
+
+end program Diagonalizacion
+
+
+!-------------------!
+
+!---------------------------------------------------------!
+!Calls the LAPACK diagonalization subroutine DSYEV        !
+!input:  a(n,n) = real symmetric matrix to be diagonalized!
+!            n  = size of a                               !
+!output: a(n,n) = orthonormal eigenvectors of a           !
+!        eig(n) = eigenvalues of a in ascending order     !
+!---------------------------------------------------------!
+ subroutine diasym(a,eig,n)
+ implicit none
+
+ integer n,l,inf
+ real*8  a(n,n),eig(n),work(n*(3+n/2))
+
+ l=n*(3+n/2)
+ call dsyev('V','U',n,a,n,eig,work,l,inf)
+
+ end subroutine diasym
+ !---------------------!
+
+ !--------------------------------!
+ subroutine kronecker(m,k,res)
+   implicit none
+   integer k, m, res
+
+   if (k == m) then
+      res=1
+   else
+      res=0
+   end if
+ end subroutine kronecker
+
+
+ !--- Rutina para calcular eigenvalores para un valor particular de gammax
+ subroutine gmx(x,A,n,j,r,eigp)
+   integer h,k,m,l,p,q,i,ii
+   integer r(n)
+   double precision x
+   double precision :: A(n,n), B(n,n)
+   double precision sqr1, sqr2
+   real(8):: eigp(n)
+   h= 2*j-1
+   A(:,:)=0.0
+   
+!*******************************************************************
+!*********** Aquí se asignan los elementos te matriz ***************
+!***** Consideraciones: epsilon=1, hbar=1, gammay=3gammax ********** 
+!******************************************************************* 
+   do i=1,n
+      k=r(i)
+      do ii=1,n
+         m=r(ii)
+         call kronecker(m,k,l)
+         call kronecker(m+2,k,p)
+         call kronecker(m-2,k,q)
+         !print*, l,p,q,k,m
+         sqr1= p*((j*(j+1)-m*(m+1))*(j*(j+1)-(m+1)*(m+2)))**0.5
+         sqr2= q*((j*(j+1)-m*(m-1))*(j*(j+1)-(m-1)*(m-2)))**0.5
+         A(i,ii)=m*l-0.5*(x/h)*(sqr1 + sqr2 - 4*l*(j*(j+1)-m**2))
+      end do
+   end do
+   
+   !--- Con B se llama a la subrutina para diagonalizar
+   !... Se retornará la lista de eigenvalores para un x particular.
+   B(:,:)=A(:,:)
+   call diasym(B,eigp,n)
+ end subroutine gmx
+   
+
+ subroutine range(n,j,rango)
+   integer i,ii,w
+   integer rango(n)
+   !! Esta rutina recibe un tamaño n para hacer una lista de valores entre j y -j en pasos de 1
+   
+   w=j
+   do i=1,n
+      if (w < 0) then
+         rango(i)=w
+      else if(w == 0) then
+         rango(i)=0
+      else
+         rango(i)= w
+      end if
+      w=w-1
+   end do
+ end subroutine range
+
+  ! Esta rutina calculaun binomial, por el momento no hagas caso
+subroutine binomial(x,y,b)
+     implicit none
+     integer :: x, y, i
+     REAL(8) :: b
+     real :: binnum, binden1, binden2
+     binnum=1.0
+     do i=0,X-1
+     binnum=binnum*(X-i)
+     enddo
+     binden1=1.0
+     do i=0,Y-1
+     binden1=binden1*(Y-i)
+     enddo
+     binden2=1.0
+     do i=0,X-Y-1
+     binden2=binden2*(X-Y-i)
+     enddo
+     b=binnum/(binden1*binden2)
+
+     end subroutine binomial

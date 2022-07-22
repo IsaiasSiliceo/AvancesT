@@ -1,0 +1,1 @@
+splot 'WehrlImpares(copia).dat' using 1:2:3 with lines lc 7 title 'Impares','WehrlPares(copia).dat' using 1:2:3 with lines lc 8 title 'Pares'

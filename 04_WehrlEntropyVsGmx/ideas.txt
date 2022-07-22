@@ -1,0 +1,53 @@
+## Sólo una lluvia de ideas para organizar el programa de la entropía.
+
+Mi programa debe
+1) Pedir una j en particular
+
+2) A partir de ello diagonalizar la matriz Hamiltoniana 'Diagonalización.f90' para un valor particular de gammax
+3) Pedir un estado K para realizar el cálculo de la representación de Husimi.
+4) Una vez tengamos todas las Q(alpha) sólo necesito sumarlas todas para encontrar el valor de la integral.
+El valor de la entropía según el artículo es -int(Q(alpha)*log(Q(alpha))
+Entonces en un paso, tendremos el valor de la integral para un valor particular de gammax para una K en particular.
+
+Lo anterior sólo será un paso de lo siguiente
+
+Necesitamos iterar el programa anterior para encontrar pares de puntos (gmx,Wint) para poder realizar un gráfico como el de la figura 5.
+
+Estaría chido que los datos quedaran
+
+gmx	Wint62	  Wint63    Wint64	Wint65	Wint66	Wint67
+
+En columnas de este tipo, para que pueda hacer un multiplot de todas.
+Intervalo de gmx llamado F = (1,2,3,4,5,6)
+
+Pedimos un valor de j.
+calculamos las dimensiones de los arrays necesarios.
+
+Abrimos el archivo donde vamos a guardar WEntropy.dat
+
+Para i=1, dimension(F)
+     Aquí llamamos a diagonalización con uno de los valores de F[i]
+     (La salida son los valores y vectores propios, hay 2j+1 vectores)
+     para ii=1, dimension(T) (K=62-77)
+     	  Tomamos de T[i] uno de los valores de K
+	  Llamamos al cálculo de la integral de la entropía
+	  (La salida de esta llamada ya debe ser la -Int(Q.log(Q))
+	  tempint[ii] = Integral calculada
+     end para
+     Write() gmx, tempint[:] (Aquí ya se imprime en el archivo todo.)
+end para
+
+El cálculo de la integral se va a encerrar en una función que requerirá que le otorguen un vector propio K. Esta función tendrá los dos ciclos sobre theta y phi para ir calculando la suma conforme se calculen las Q(alpha)
+
+Iniciamos Wint en cero.
+
+Para i=1, 100
+     Para ii=1, 200
+     	  Llamamos a la función Husimi, en donde se calcula la representación para un valor particular de theta y de phi.
+	  (La salida de esto es P,Q,Q(alpha) Pero sólo necesitamos Q(alpha)
+	  Wint = Wint + Q(alpha)log(Q(alpha)
+	  phi = phi + delta
+     end para
+     theta + delta
+end para
+     

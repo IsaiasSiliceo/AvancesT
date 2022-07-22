@@ -1,0 +1,8 @@
+program prueba
+  implicit none
+  character(len=6) :: filename
+
+  write (filename, "(I2,A4)") 10,".dat"
+
+  print *, trim(filename)
+end program prueba

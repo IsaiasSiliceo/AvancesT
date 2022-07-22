@@ -1,0 +1,34 @@
+Debo exportar 2 Ek para cada partición. Haciendo esta cada vez más fina esta partición.
+
+Esto es: Diagonalizar con precisión 40 dígitos pero sólo exportar 2 Ek para una partición en particular.
+
+Es conveniente primero hacer una lista con estas particiones. Si sólo serán 2 vectores, tal vez es conveniente sobreescribir desde Mathematica el archivo que tenga los 50 vectores propios para 50 valores de gammax. Los valores propios y los valores propios se siguen exportando de la misma manera, tal vez buscando leer por bloques de 101 datos.
+
+Luego, desde Fortran, sólo será importante calcular la Entropía de Wehrl para esos 2 estados Ek por lo que la ejecución por cada partición debe ser de 20 minutos aproximadamente.
+
+Queremos realizar el cálculo para los estados: 60-87
+
+La primera gráfica incluye 16 estados 60-75 incluyendo 60
+La segunda gráfica incluye 12 estados 76-87 incluyendo 87
+
+Para cada par de estados se realiza una partición cada vez más fina.
+
+#################################################
+	   PARTICIONES: en 50 pasos
+#################################################
+
+62-63: 4.09-4.12	(paso: 3/5000)
+64-65: 4.102-4.105	(paso: 3/50000)
+66-67: 4.10325-4.10335	(paso: 1/500000) **Tal vez sea bueno refinarlo más
+68-69: 4.103310-4.103312 (paso:1/25000000) ** Más puntos
+70-71: 4.10331075-4.10331090 (paso:1/625000000) ** Prueba este intervalo
+72-73: 4.10331084171-4.10331084177 (paso:1/50 000 000 000)
+74-75: 4.103310841740-4.103310841741 (paso:1/50 000 000 000 000)
+76-77: 
+
+
+!! Realizo una partición para 4 estados.
+62-65, por ejemplo. Esta partición sólo es adecuada para 62-63 pero sirve para definir la siguiente partición de 64-65.
+En esta nueva partición reviso si para 66-67 funciona. Aunque no sea así. Es posible definir la nueva partición para 66-67 que a su vez confirmará la partición apropiada para los siguientes 2.
+
+Este proceso se repite consecutivamente hasta los estados 76-77

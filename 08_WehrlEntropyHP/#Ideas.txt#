@@ -1,0 +1,59 @@
+Debo exportar 2 Ek para cada partición. Haciendo esta cada vez más fina esta partición.
+
+Esto es: Diagonalizar con precisión 40 dígitos pero sólo exportar 2 Ek para una partición en particular.
+
+Es conveniente primero hacer una lista con estas particiones. Si sólo serán 2 vectores, tal vez es conveniente sobreescribir desde Mathematica el archivo que tenga los 50 vectores propios para 50 valores de gammax. Los valores propios y los valores propios se siguen exportando de la misma manera, tal vez buscando leer por bloques de 101 datos.
+
+Luego, desde Fortran, sólo será importante calcular la Entropía de Wehrl para esos 2 estados Ek por lo que la ejecución por cada partición debe ser de 20 minutos aproximadamente.
+
+Queremos realizar el cálculo para los estados: 60-87
+
+La primera gráfica incluye 16 estados 60-75 incluyendo 60
+La segunda gráfica incluye 12 estados 76-87 incluyendo 87
+
+Para cada par de estados se realiza una partición cada vez más fina.
+
+#################################################
+	   PARTICIONES: en 50 pasos
+#################################################
+
+62-63: 4.09-4.12	(paso: 3/5000)
+64-65: 4.102-4.105	(paso: 3/50000) Más puntos
+66-67: 4.10325-4.10335	(paso: 1/500000) **Más puntos
+68-69: 4.103310-4.103312 (paso:1/25000000) ** Más puntos recorre a la derecha
+70-71: 4.10331075-4.10331090 (paso:1/625000000) ** Prueba este intervalo
+72-73: 4.10331084171-4.10331084177 (paso:1/50 000 000 000) ** Más puntos
+74-75: 4.1033108417404-4.1033108417406 (paso:1/50 000 000 000 000) **Más puntos
+76-77:  NO ES POSIBLE EN Double Precision
+
+
+Ahora vamos a generar primero las particiones para hacer sólo 4 ejecuciones que arrojen los 8 pares de datos. Son 8 particiones distintas de acuerdo a lo obtenido.
+1. Genera 2 particiones para cada 4 estados por cada ejecución.
+2. Exportalos y guardalos todos en la misma carpeta.
+3. Hay que modificar src para que soporte 65 pasos mas el AC.
+##################################################
+		Particiones: 68 pasos
+##################################################
+Execution1:
+62-63: 4.08-4.13	(paso:)
+64-65: 4.102-4.105	(paso:)
+
+Execution2:
+66-67: 4.10327-4.10335	(paso:)
+68-69: 4.1033100-4.1033115 (paso:)
+
+Execution3:
+70-71: 4.10331084-4.10331085 (paso:) **ACTUALIZAR
+72-73: 4.10331084171-4.10331084177 (paso:)
+
+Execution4:
+74-75: 4.10331084174045-4.10331084174065 (paso:)
+76-77: 4.10331084174045-4.10331084174065 
+
+!!! Modificar src para soportar una precisión mayor de almenos 20-30 dígitos.
+76-77
+78-79
+80-81
+82-83
+84-85
+86-87

@@ -1,0 +1,20 @@
+set terminal push
+set encoding utf8
+set terminal pngcairo font 'Helvetica, 14' size 1200,650 enhanced color
+set output 'Whole_60-79.png'
+
+set title "{/:Bold=16 Wehrl entropy, Positive Parity, k=60-79}"
+
+set size square
+set format x
+set format y
+set yrange [-2.5:-1.3]
+set pm3d map
+set cbrange[2.5:3.8]
+set xlabel '|{/Symbol g}_x|'
+set ylabel 'E_i / j' rotate by 0
+
+splot 'Whole.dat' using 1:2:3 with pm3d, 'WehrlPares(copia).dat' using 1:2:3 with lines lw 2 lc 7 title 'Even', 'WehrlImpares(copia).dat' using 1:2:3 with lines lc 6 title 'Odd'
+
+set terminal pop
+set output

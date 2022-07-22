@@ -1,0 +1,30 @@
+##### Ideas para observar el comportamiento del modelo de
+##### LMG para un valor particular de gamma_x incrementando j
+
+1. Observar el comportamiento del espectro de energía alrededor
+del valor del parámetro más cercano a N=170 para diferentes 
+valores de j. j=200, j=500, j=800, j=1000. (COMPLETADO)
+
+2. De lo anterior obtener para cada valor de j, listas de los 
+pares de niveles de energía involucrados en el cruce evitado Calcular la energía de los niveles involucrados para obtener el Gap en función de la diferencia de la energía promedio menos el ESQPT
+
+3. Para cada valor de j, repetir:
+
+ -- Diagonalizar Hamiltoniano LMG para cada par de niveles 
+reduciendo el step en gamma_x a medida que aumenta la energía
+
+ -- Hacer una tabla de las energías de cada nivel, así como
+calcular la diferencia de energías para cada par y agregar
+el valor del ESQPT para ese valor del cruce evitado.
+
+ -- Correr el programa de la entropía para calcular los máximos
+para cada par de niveles involucrados en el valor de gamma_x 
+
+ -- Obtener gráficos de los máximos para ese valor del cruce.
+Si son adecuados, ordenar los datos para realizar los ajustes
+gaussianos. Recolectar el parámetro sigma de ensanchamiento
+para cada par de niveles y realizar una tabla sigma vs DeltaEi vs ESQPT
+
+Finalmente, graficar los puntos sigma vs delta Ei para los 
+diferentes valores de j y obtener 5 rectas. Una por cada valor
+de j.

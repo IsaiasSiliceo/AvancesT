@@ -1,0 +1,28 @@
+program kick
+  implicit none
+  integer i, ii, j
+  real(4) :: K, Pi= acos(-1.0), delta, x0, p0, p, pn, xn1, xn, pn1
+
+  !We want o iterate the two expresions for p and x over an interval
+  ! 0-> 2pi 0->2pi. Write all these points x,p
+
+  !We start defining p0, and K
+  K=0.5
+
+  delta= Pi/10
+  x0=0.0
+  p0=0.0
+  
+  open(10, file= 'Kdata.dat',status= 'unknown')
+  do i=1, 20
+     do ii=1, 20
+        pn1 = p0 + K*sin(x0)
+        xn1 = x0 + pn1
+        write(10,*) xn1, pn1
+        x0 = x0 + delta
+     end do
+     x0 = 0.0
+     p0 = p0 + delta
+  end do
+  close(10)
+end program kick

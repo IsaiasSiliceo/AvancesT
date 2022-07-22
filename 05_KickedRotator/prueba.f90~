@@ -1,0 +1,6 @@
+program prueba
+  implicit none
+  character :: string1
+  string1 = char(10)
+  print*, string1
+end program prueba

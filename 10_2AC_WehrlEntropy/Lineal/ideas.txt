@@ -1,0 +1,11 @@
+1) Gráfico sigma promedio vs E promedio
+Para este gráfico ya tienes los promedios de sigma pero
+no tienes la Energía promedio, debes encontrar la energía
+de cada par de estados y luego calcular el promedio.
+
+2) Gráfico de Diferencia de energía contra energía promedio
+Para este gráfico ya tienes la diferencia de energía, sólo hace
+falta la energía promedio 
+
+Para ambos casos hay que calcular la ESQPT en el valor del
+cruce evitado.
